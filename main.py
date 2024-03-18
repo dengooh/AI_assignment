@@ -1,7 +1,6 @@
-from collections import deque
-from board import Board
-from search_algorithms import BFS
 
+from board import Board
+from bfs import BFS
 # import sys
 
 # filename = sys.argv[1]
@@ -13,14 +12,14 @@ from search_algorithms import BFS
 #         print(line)
 
 
-Graph = {
-    'a': ['c', 'b'],
-    'b': ['d'],
-    'c': ['e'],
-    "d": ['f'],
-    'e': [],
-    'f': []
-}
+# Graph = {
+#     'a': ['c', 'b'],
+#     'b': ['d'],
+#     'c': ['e'],
+#     "d": ['f'],
+#     'e': [],
+#     'f': []
+# }
 
 
 # def DFS(graph, start):
@@ -49,27 +48,27 @@ Graph = {
 #     return visited
 #
 
-def DFS(graph, start):
-    visited = []
-    stack = [start]
-    while len(stack) > 0:
-        node = stack.pop()
-        if node not in visited:
-            visited.append(node)
-
-        for neighbor in graph[node]:
-            stack.append(neighbor)
-
-    return visited
-
-
-arrayFromRecursiveDFS = []
-
-
-def recursiveDFS(graph, start):
-    arrayFromRecursiveDFS.append(start)
-    for neighbor in graph[start]:
-        recursiveDFS(graph, neighbor)
+# def DFS(graph, start):
+#     visited = []
+#     stack = [start]
+#     while len(stack) > 0:
+#         node = stack.pop()
+#         if node not in visited:
+#             visited.append(node)
+#
+#         for neighbor in graph[node]:
+#             stack.append(neighbor)
+#
+#     return visited
+#
+#
+# arrayFromRecursiveDFS = []
+#
+#
+# def recursiveDFS(graph, start):
+#     arrayFromRecursiveDFS.append(start)
+#     for neighbor in graph[start]:
+#         recursiveDFS(graph, neighbor)
 
 #
 # print("search by DFS: ", DFS(Graph, 'a'))
