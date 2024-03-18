@@ -1,4 +1,4 @@
-from search_algorithms import SearchAlgorithm, DIRECTIONS
+from search_algorithm import SearchAlgorithm, DIRECTIONS
 
 
 # Implemented the same way as BFS, but use a stack memory (FILO)

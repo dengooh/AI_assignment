@@ -1,4 +1,4 @@
-from search_algorithms import SearchAlgorithm, DIRECTIONS
+from search_algorithm import SearchAlgorithm, DIRECTIONS
 from collections import deque
 
 

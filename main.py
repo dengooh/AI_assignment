@@ -28,11 +28,13 @@ if __name__ == "__main__":
     ]
 
     board = Board(grid_rows, grid_cols, walls)
+
     bfs = BFS(board, initial_state, goal_state)
     dfs = DFS(board, initial_state, goal_state)
 
     bfs_path, bfs_directions = bfs.find_path()
     dfs_path, dfs_directions = dfs.find_path()
+
     print("Path found with BFS approach: ", bfs_path)
     print("Direction found with BFS: ", bfs_directions)
 
