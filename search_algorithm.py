@@ -6,15 +6,14 @@ class SearchAlgorithm:
     def __init__(self, board, start, goal_state):
         self.board = board
         self.start = start
-        self.goal_states = goal_state
+        self.goal_state = goal_state
 
     def find_path(self):
-        return None
+        pass
 
     @staticmethod
     def reconstruct_path(path, goal):
-        # Initializes 'current' with the goal node. This is the node from which the method begins backtracking to --
-        # the start node
+        # Initializes 'current' with the goal node.
         current = goal
         # Initializes a list 'path_taken' with the current node (initially the goal node). This list will store the --
         # sequence of nodes visited on the path from the start node to the goal node, in reverse order initially.
@@ -27,7 +26,8 @@ class SearchAlgorithm:
         direction_names = {(0, -1): 'UP', (-1, 0): 'Left', (0, 1): 'DOWN', (1, 0): 'RIGHT'}
 
         # Follow the recorded path back to the start state.
-        while path.get(current) is not None:
+        # while path.get(current) is not None:
+        while current in path and path[current] is not None:
             # Retrieves the predecessor of the current node and stores it in 'prev'
             prev = path[current]
             # Adds the predecessor node to the 'path_taken' list. This builds up the path from the goal node back to --
@@ -51,3 +51,8 @@ class SearchAlgorithm:
         directions_taken.reverse()
 
         return path_taken, directions_taken
+
+    def heuristic(self, current):
+        # Manhattan distance to the closest goal_state
+        # (return the x, y distances coordinates between the current and the goal nodes)
+        return min(abs(current[0] - goal_state[0]) + abs(current[1] - goal_state[1]) for goal_state in self.goal_state)

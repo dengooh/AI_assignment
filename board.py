@@ -23,12 +23,10 @@ class Board:
     def is_free(self, x, y):
         return True if 0 <= y < self.rows and 0 <= x < self.cols and self.grid[y][x] != 'X' else False
         # '0 <= y < self.rows' checks if the y coordinate is within the vertical bounds of the grid.
-            # '0 <= y' ensures that y is not negative (it's at least the top row).
-            # 'y < self.rows' ensures that y is less than the number of rows in the grid (it's not below the bottom row0
+        # '0 <= y' ensures that y is not negative (it's at least the top row).
+        # 'y < self.rows' ensures that y is less than the number of rows in the grid (it's not below the bottom row0
 
         # '0 <= x < self.cols' checks if the x coordinate is within the horizontal bounds of the grid
-            # '0 <= x' ensures that x is not negative (it's at least the leftmost column)
-            # 'x < self.cols' ensures that x is less than the number of columns in the grid --
-            # (it's not beyond the rightmost column).
-
-
+        # '0 <= x' ensures that x is not negative (it's at least the leftmost column)
+        # 'x < self.cols' ensures that x is less than the number of columns in the grid --
+        # (it's not beyond the rightmost column).

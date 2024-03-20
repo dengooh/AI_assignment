@@ -1,6 +1,8 @@
 from board import Board
 from bfs import BFS
 from dfs import DFS
+from gbfs import GBFS
+from astar import AS
 
 # import sys
 
@@ -31,15 +33,27 @@ if __name__ == "__main__":
 
     bfs = BFS(board, initial_state, goal_state)
     dfs = DFS(board, initial_state, goal_state)
+    gbfs = GBFS(board, initial_state, goal_state)
+    astar = AS(board, initial_state, goal_state)
 
     bfs_path, bfs_directions = bfs.find_path()
     dfs_path, dfs_directions = dfs.find_path()
+    gbfs_path, gbfs_directions = gbfs.find_path()
+    astar_path, astar_directions = astar.find_path()
 
     print("Path found with BFS approach: ", bfs_path)
     print("Direction found with BFS: ", bfs_directions)
 
-    print("Path found with DFS approach: ", dfs_path)
-    print("Direction found with DFS: ", dfs_directions)
+    # print("Path found with DFS approach: ", dfs_path)
+    # print("Direction found with DFS: ", dfs_directions)
+    #
+    # print("Path found with GBFS approach: ", gbfs_path)
+    # print("Direction found with GBFS: ", gbfs_directions)
+
+    print("Path found with ASTAR approach: ", astar_path)
+    print("Direction found with ASTAR: ", astar_directions)
+
+
 
     # Graph = {
     #     'a': ['c', 'b'],
