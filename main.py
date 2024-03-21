@@ -44,16 +44,16 @@ if __name__ == "__main__":
     print("Path found with BFS approach: ", bfs_path)
     print("Direction found with BFS: ", bfs_directions)
 
-    # print("Path found with DFS approach: ", dfs_path)
-    # print("Direction found with DFS: ", dfs_directions)
-    #
-    # print("Path found with GBFS approach: ", gbfs_path)
-    # print("Direction found with GBFS: ", gbfs_directions)
+    print("Path found with DFS approach: ", dfs_path)
+    print("Direction found with DFS: ", dfs_directions)
+
+    print("Path found with GBFS approach: ", gbfs_path)
+    print("Direction found with GBFS: ", gbfs_directions)
 
     print("Path found with ASTAR approach: ", astar_path)
     print("Direction found with ASTAR: ", astar_directions)
 
-
+    #
 
     # Graph = {
     #     'a': ['c', 'b'],

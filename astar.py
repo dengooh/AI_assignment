@@ -14,10 +14,8 @@ class AS(SearchAlgorithm):
         path = {self.start: None}
         # Cost from start to the current node
         g_score = {self.start: 0}
-        loop = 0
 
         while open_set:
-            loop += 1
             current_priority, current = heappop(open_set)
 
             if current in self.goal_state:
