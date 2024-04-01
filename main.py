@@ -20,8 +20,9 @@ if __name__ == "__main__":
 #         (8, 4, 2, 1)
 #         ]
 
-    get_grid_size = TermInput.get_grid_size()
-    print(get_grid_size)
+    terminput = TermInput()
+    print(terminput.get_grid_size())
+    print(terminput.get_initial_state())
 
     # grid_rows, grid_cols = 8, 15
     # initial_state = (0, 2)
