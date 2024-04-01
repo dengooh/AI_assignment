@@ -14,6 +14,7 @@ class GBFS(SearchAlgorithm):
         # maps each node to its predecessor on the shortest path found so far. The start node doesn't have a --
         # predecessor, hence it's mapped to 'None'
         path = {self.start: None}
+        visited = set()
 
         while open_set:
             # removes and returns the node with the highest priority (lowest value) from the 'open_set' --
@@ -22,7 +23,7 @@ class GBFS(SearchAlgorithm):
             current_priority, current = heappop(open_set)
 
             if current in self.goal_state:
-                return self.reconstruct_path(path, current)
+                return self.reconstruct_path(path, current, visited)
 
             # unpacks the current node's coordinate
             x, y = current
@@ -34,6 +35,7 @@ class GBFS(SearchAlgorithm):
                 if self.board.is_free(next_x, next_y):
                     # assigns the coordinates of the neighboring node
                     next_step = (next_x, next_y)
+                    visited.add(next_step)
                     if next_step not in path:
                         # calculates the priority of the neighboring node using the heuristic function. This priority --
                         # is typically a measure of how close the node is to the goal

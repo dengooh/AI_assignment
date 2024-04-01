@@ -15,14 +15,12 @@ class BFS(SearchAlgorithm):
         visited = {self.start}
         # Record the path taken to reach each cell
         path = {self.start: None}
-        loop = 0
 
         # Process each cell in the queue
         while queue:
-            loop += 1
             current = queue.popleft()
             if current in self.goal_state:
-                return self.reconstruct_path(path, current)
+                return self.reconstruct_path(path, current, visited)
 
             x, y = current
             # the current node is assumed to be a tuple (or list) of two elements representing its position on the board
@@ -48,5 +46,6 @@ class BFS(SearchAlgorithm):
                     # this is essential for reconstructing the path once a goal state is reached. When the goal is --
                     # found, you can trace back from the goal to the start node using this dictionary, effectively --
                     # reconstructing the path taken.
+
         # If no path is found, return None.
         return None

@@ -14,12 +14,13 @@ class AS(SearchAlgorithm):
         path = {self.start: None}
         # Cost from start to the current node
         g_score = {self.start: 0}
+        visited = set()
 
         while open_set:
             current_priority, current = heappop(open_set)
 
             if current in self.goal_state:
-                return self.reconstruct_path(path, current)
+                return self.reconstruct_path(path, current, visited)
 
             x, y = current
             for dx, dy in DIRECTIONS:
@@ -31,6 +32,7 @@ class AS(SearchAlgorithm):
                 # Assume cost between nodes is 1
                 tentative_g_score = g_score[current] + 1
                 next_node = (next_x, next_y)
+                visited.add((next_x, next_y))
 
                 if next_node not in g_score or tentative_g_score < g_score[next_node]:
                     # This path to the neighbor is better than any previous one

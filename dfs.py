@@ -14,7 +14,7 @@ class DFS(SearchAlgorithm):
         while stack:
             current = stack.pop()
             if current in self.goal_state:
-                return self.reconstruct_path(path, current)
+                return self.reconstruct_path(path, current, visited)
 
             x, y = current
 

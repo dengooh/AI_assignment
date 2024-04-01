@@ -12,7 +12,7 @@ class SearchAlgorithm:
         pass
 
     @staticmethod
-    def reconstruct_path(path, goal):
+    def reconstruct_path(path, goal, visited):
         # Initializes 'current' with the goal node.
         current = goal
         # Initializes a list 'path_taken' with the current node (initially the goal node). This list will store the --
@@ -50,7 +50,7 @@ class SearchAlgorithm:
         # taken from start to goal
         directions_taken.reverse()
 
-        return path_taken, directions_taken
+        return path_taken, directions_taken, len(visited), path_taken[-1]
 
     def heuristic(self, current):
         # Manhattan distance to the closest goal_state
