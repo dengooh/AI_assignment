@@ -4,8 +4,8 @@ from collections import deque
 
 # Inherits from SearchAlgorithm
 class BFS(SearchAlgorithm):
-    def __init__(self, board, start, goal_state):
-        super().__init__(board, start, goal_state)
+    def __init__(self, board, start, goal):
+        super().__init__(board, start, goal)
 
     # Perform BFS to find a path from start to one of the goal states
     def find_path(self):
@@ -19,7 +19,7 @@ class BFS(SearchAlgorithm):
         # Process each cell in the queue
         while queue:
             current = queue.popleft()
-            if current in self.goal_state:
+            if current in self.goal:
                 return self.reconstruct_path(path, current, visited)
 
             x, y = current
@@ -48,4 +48,4 @@ class BFS(SearchAlgorithm):
                     # reconstructing the path taken.
 
         # If no path is found, return None.
-        return None
+        return None, None, len(visited), "No goal is reachable"

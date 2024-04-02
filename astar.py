@@ -3,8 +3,8 @@ from heapq import heappush, heappop
 
 
 class AS(SearchAlgorithm):
-    def __init__(self, board, start, goal_state):
-        super().__init__(board, start, goal_state)
+    def __init__(self, board, start, goal):
+        super().__init__(board, start, goal)
 
     def find_path(self):
         # Open set contains nodes to be evaluated, as (F cost, node) tuples
@@ -19,7 +19,7 @@ class AS(SearchAlgorithm):
         while open_set:
             current_priority, current = heappop(open_set)
 
-            if current in self.goal_state:
+            if current in self.goal:
                 return self.reconstruct_path(path, current, visited)
 
             x, y = current
@@ -41,4 +41,4 @@ class AS(SearchAlgorithm):
                     f_score = tentative_g_score + self.heuristic(next_node)
                     heappush(open_set, (f_score, next_node))
 
-        return None
+        return None, None, len(visited), "No goal is reachable"

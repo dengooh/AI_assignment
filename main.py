@@ -10,6 +10,8 @@ if __name__ == "__main__":
 
     TI = TermInput()
 
+    print(TI.get_filename())
+
     grid_rows = TI.get_grid_size()[0]
     grid_cols = TI.get_grid_size()[1]
     initial_state = TI.get_initial_state()
@@ -18,43 +20,45 @@ if __name__ == "__main__":
 
     board = Board(grid_rows, grid_cols, walls)
 
-    bfs = BFS(board, initial_state, goal_state)
-    dfs = DFS(board, initial_state, goal_state)
-    gbfs = GBFS(board, initial_state, goal_state)
-    astar = AS(board, initial_state, goal_state)
-
-    bfs_path, bfs_directions, bfs_visited, bfs_goal = bfs.find_path()
-    dfs_path, dfs_directions, dfs_visited, dfs_goal = dfs.find_path()
-    gbfs_path, gbfs_directions, gbfs_visited, gbfs_goal = gbfs.find_path()
-    astar_path, astar_directions, astar_visited, astar_goal = astar.find_path()
-
     match TI.get_method():
         case 'BFS':
-            print("Path found with BFS approach: ", bfs_path)
-            print("Direction found with BFS: ", bfs_directions)
-            print("Visited: ", bfs_visited)
-            print("Goal node: ", bfs_goal)
+            bfs = BFS(board, initial_state, goal_state)
+            bfs_path, bfs_directions, bfs_visited, bfs_goal = bfs.find_path()
 
-            if TI.get_second_method() == 'GUI':
-                print('GUI')
+            print(TI.get_filename() + " " + TI.get_method())
+            print("Goal node: ", bfs_goal)
+            print("Visited: ", bfs_visited)
+            print("Direction found with BFS: ", bfs_directions)
+
+            if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
+                print("gui")
 
         case 'DFS':
-            print("Path found with DFS approach: ", dfs_path)
-            print("Direction found with DFS: ", dfs_directions)
-            print("Visited: ", dfs_visited)
+            dfs = DFS(board, initial_state, goal_state)
+            dfs_path, dfs_directions, dfs_visited, dfs_goal = dfs.find_path()
+
+            print(TI.get_filename() + " " + TI.get_method())
             print("Goal node: ", dfs_goal)
+            print("Visited: ", dfs_visited)
+            print("Direction found with DFS: ", dfs_directions)
 
         case 'GBFS':
-            print("Path found with GBFS approach: ", gbfs_path)
-            print("Direction found with GBFS: ", gbfs_directions)
-            print("Visited: ", gbfs_visited)
+            gbfs = GBFS(board, initial_state, goal_state)
+            gbfs_path, gbfs_directions, gbfs_visited, gbfs_goal = gbfs.find_path()
+
+            print(TI.get_filename() + " " + TI.get_method())
             print("Goal node: ", gbfs_goal)
+            print("Visited: ", gbfs_visited)
+            print("Direction found with BFS: ", gbfs_directions)
 
         case 'AS':
-            print("Path found with ASTAR approach: ", astar_path)
-            print("Direction found with ASTAR: ", astar_directions)
-            print("Visited: ", astar_visited)
+            astar = AS(board, initial_state, goal_state)
+            astar_path, astar_directions, astar_visited, astar_goal = astar.find_path()
+
+            print(TI.get_filename() + " " + TI.get_method())
             print("Goal node: ", astar_goal)
+            print("Visited: ", astar_visited)
+            print("Direction found with BFS: ", astar_directions)
 
         case 'CUS1':
             pass

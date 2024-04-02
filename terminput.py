@@ -1,20 +1,31 @@
 import sys
+import argparse
 
 
 class TermInput:
     def __init__(self):
-        self.filename = sys.argv[1]
-        self.method = sys.argv[2]
-        # self.method2 = sys.argv[3]
 
-    # def get_second_method(self):
-    #     return self.method2
+        self.p = argparse.ArgumentParser()
+        self.p.add_argument("args", nargs="+")
+        self.args = self.p.parse_args()
+        self.term_args = ' '.join(self.args.args)
+
+    def setup_args(self):
+        return self.term_args.split()
+
+    def get_filename(self):
+        return self.setup_args()[0]
 
     def get_method(self):
-        return self.method
+        return self.setup_args()[1]
+
+    def get_second_method(self):
+        if len(self.setup_args()) > 2:
+            return self.setup_args()[2]
+        return None
 
     def get_grid_size(self):
-        with open(self.filename, 'r') as file:
+        with open(self.get_filename(), 'r') as file:
             line = file.readline().strip()
 
         grid_size_str = line.replace('[', '').replace(']', '')
@@ -25,7 +36,7 @@ class TermInput:
         return grid_rows, grid_cols
 
     def get_initial_state(self):
-        with open(self.filename, 'r') as file:
+        with open(self.get_filename(), 'r') as file:
             next(file)
             line = file.readline().strip()
 
@@ -36,7 +47,7 @@ class TermInput:
 
     def get_goal_state(self):
         goal_coordinates = []
-        with open(self.filename, 'r') as file:
+        with open(self.get_filename(), 'r') as file:
             next(file)
             next(file)
             line = file.readline().strip().split(' | ')
@@ -50,7 +61,7 @@ class TermInput:
 
     def get_walls(self):
         walls_coordinates = []
-        with open(self.filename, 'r') as file:
+        with open(self.get_filename(), 'r') as file:
             next(file)
             next(file)
             next(file)

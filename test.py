@@ -1,25 +1,7 @@
-Graph = {
-    'a': ['b', 'c'],
-    'b': ['d'],
-    'c': ['e'],
-    "d": ['f'],
-    'e': [],
-    'f': []
-}
+import argparse
 
+p = argparse.ArgumentParser()
+p.add_argument("args", nargs="+")
+args = p.parse_args()
 
-def DFS(graph, start):
-    visited = []
-    stack = [start]
-    while len(stack) > 0:
-        node = stack.pop()
-        if node not in visited:
-            visited.append(node)
-
-        for neighbor in graph[node]:
-            stack.append(neighbor)
-
-    return visited
-
-
-print(DFS(Graph, 'a'))
+print("your args: " + " ".join(args.args))

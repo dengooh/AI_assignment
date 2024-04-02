@@ -13,7 +13,7 @@ class DFS(SearchAlgorithm):
 
         while stack:
             current = stack.pop()
-            if current in self.goal_state:
+            if current in self.goal:
                 return self.reconstruct_path(path, current, visited)
 
             x, y = current
@@ -26,4 +26,4 @@ class DFS(SearchAlgorithm):
                     path[(next_x, next_y)] = current
 
         # If no path is found, return None
-        return None
+        return None, None, len(visited), "No goal is reachable"

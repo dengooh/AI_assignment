@@ -3,8 +3,8 @@ from heapq import heappush, heappop
 
 
 class GBFS(SearchAlgorithm):
-    def __init__(self, board, start, goal_state):
-        super().__init__(board, start, goal_state)
+    def __init__(self, board, start, goal):
+        super().__init__(board, start, goal)
 
     def find_path(self):
         # this list will be used as a priority queue where nodes to be explored are stored along with their priorities
@@ -22,7 +22,7 @@ class GBFS(SearchAlgorithm):
             # 'current-property' is its priority
             current_priority, current = heappop(open_set)
 
-            if current in self.goal_state:
+            if current in self.goal:
                 return self.reconstruct_path(path, current, visited)
 
             # unpacks the current node's coordinate
@@ -46,4 +46,4 @@ class GBFS(SearchAlgorithm):
                         # records the current node as the predecessor of the neighbor. need for path reconstruction
                         path[next_step] = current
 
-        return None
+        return None, None, len(visited), "No goal is reachable"
