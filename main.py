@@ -1,16 +1,14 @@
 from board import Board
-from bfs import BFS
-from dfs import DFS
-from gbfs import GBFS
-from astar import AS
+from bfs import BFS, BFS_GUI
+from dfs import DFS, DFS_GUI
+from gbfs import GBFS, GBFS_GUI
+from astar import AS, AS_GUI
 from terminput import TermInput
 
 
 if __name__ == "__main__":
 
     TI = TermInput()
-
-    print(TI.get_filename())
 
     grid_rows = TI.get_grid_size()[0]
     grid_cols = TI.get_grid_size()[1]
@@ -31,7 +29,11 @@ if __name__ == "__main__":
             print("Direction found with BFS: ", bfs_directions)
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
-                print("gui")
+                board = Board(grid_rows, grid_cols, walls)
+                bfs = BFS_GUI(board, 40, initial_state, goal_state)
+                # game = Visualizer()
+
+                bfs.run_visualization(bfs.bfs_gui())
 
         case 'DFS':
             dfs = DFS(board, initial_state, goal_state)
@@ -42,6 +44,14 @@ if __name__ == "__main__":
             print("Visited: ", dfs_visited)
             print("Direction found with DFS: ", dfs_directions)
 
+            if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
+                board = Board(grid_rows, grid_cols, walls)
+                dfs = DFS_GUI(board, 40, initial_state, goal_state)
+                # game = Visualizer()
+
+                dfs.run_visualization(dfs.dfs_gui())
+                # dfs.finish_path(dfs_path)
+
         case 'GBFS':
             gbfs = GBFS(board, initial_state, goal_state)
             gbfs_path, gbfs_directions, gbfs_visited, gbfs_goal = gbfs.find_path()
@@ -49,7 +59,14 @@ if __name__ == "__main__":
             print(TI.get_filename() + " " + TI.get_method())
             print("Goal node: ", gbfs_goal)
             print("Visited: ", gbfs_visited)
-            print("Direction found with BFS: ", gbfs_directions)
+            print("Direction found with GBFS: ", gbfs_directions)
+
+            if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
+                board = Board(grid_rows, grid_cols, walls)
+                gbfs = GBFS_GUI(board, 40, initial_state, goal_state)
+                # game = Visualizer()
+
+                gbfs.run_visualization(gbfs.gbfs_gui())
 
         case 'AS':
             astar = AS(board, initial_state, goal_state)
@@ -59,6 +76,13 @@ if __name__ == "__main__":
             print("Goal node: ", astar_goal)
             print("Visited: ", astar_visited)
             print("Direction found with BFS: ", astar_directions)
+
+            if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
+                board = Board(grid_rows, grid_cols, walls)
+                astar = AS_GUI(board, 40, initial_state, goal_state)
+                # game = Visualizer()
+
+                astar.run_visualization(astar.as_gui())
 
         case 'CUS1':
             pass

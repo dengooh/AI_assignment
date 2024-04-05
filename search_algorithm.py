@@ -52,7 +52,8 @@ class SearchAlgorithm:
 
         return path_taken, directions_taken, len(visited), path_taken[-1]
 
-    def heuristic(self, current):
+    @staticmethod
+    def heuristic(current, goal):
         # Manhattan distance to the closest goal_state
         # (return the x, y distances coordinates between the current and the goal nodes)
-        return min(abs(current[0] - goal_state[0]) + abs(current[1] - goal_state[1]) for goal_state in self.goal)
+        return min(abs(current[0] - goal_state[0]) + abs(current[1] - goal_state[1]) for goal_state in goal)

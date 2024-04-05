@@ -6,6 +6,15 @@ class Board:
         self.grid = [[' ' for _ in range(cols)] for _ in range(rows)]
         self.place_walls(walls)
 
+    def get_rows(self):
+        return self.rows
+
+    def get_cols(self):
+        return self.cols
+
+    def get_grid(self):
+        return self.grid
+
     # Place walls onto the grid based on the provided list of wall specifications
     def place_walls(self, walls):
         # x, y, w, and h represent the parameters of a wall in the grid

@@ -1,5 +1,7 @@
 from search_algorithm import SearchAlgorithm, DIRECTIONS
 from collections import deque
+from visualizer import Visualizer
+import pygame
 
 
 # Inherits from SearchAlgorithm
@@ -49,3 +51,40 @@ class BFS(SearchAlgorithm):
 
         # If no path is found, return None.
         return None, None, len(visited), "No goal is reachable"
+
+
+class BFS_GUI(Visualizer):
+    def __init__(self, board, square_size, start, goal):
+        super().__init__(board, square_size, start, goal)
+        pygame.display.set_caption("BFS Pathfinding Visualizer")
+
+    def bfs_gui(self):
+        queue = deque([(self.start, [self.start])])  # Queue of (position, path) tuples
+        visited = {self.start}
+
+        while queue:
+            current_pos, path = queue.popleft()
+
+            yield current_pos, path, visited, True, queue
+            # If current position is a goal, return the path
+            if current_pos in self.goal:
+                yield current_pos, path, visited, True, queue
+                return
+
+            x, y = current_pos
+
+            for dx, dy in DIRECTIONS:
+                next_x, next_y = x + dx, y + dy
+
+                # if 0 <= next_pos[0] < self.cols and 0 <= next_pos[1] < self.rows:  # Check bounds
+                #     if next_pos not in visited and self.grid[next_pos[1]][next_pos[0]] != 'X':  # Check if walkable
+                if self.board.is_free(next_x, next_y) and (next_x, next_y) not in visited:
+                    visited.add((next_x, next_y))
+                    queue.append(((next_x, next_y), path + [(next_x, next_y)]))
+
+            # Visualize the current state of the search
+            self.visualize_search()
+            pygame.time.delay(50)  # Slow down the visualization
+
+        # return []
+        yield None, None, visited, False, queue  # False indicates no path was found
