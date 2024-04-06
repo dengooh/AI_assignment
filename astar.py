@@ -51,7 +51,7 @@ class AS_GUI(Visualizer, SearchAlgorithm):
         super().__init__(board, square_size, start, goal)
         pygame.display.set_caption("A-Star Pathfinding Visualizer")
 
-    def as_gui(self):
+    def find_path(self):
         # Open set contains nodes to be evaluated, as (F cost, node) tuples
         open_set = []
         heappush(open_set, (0 + self.heuristic(self.start, self.goal), self.start))

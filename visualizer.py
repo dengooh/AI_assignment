@@ -138,7 +138,7 @@ class Visualizer(Board):
                         return
 
                 pygame.display.flip()
-                pygame.time.delay(100)  # Adjust delay for search visualization
+                pygame.time.delay(10)  # Adjust delay for search visualization
         except StopIteration:
             pass  # BFS search is complete
 

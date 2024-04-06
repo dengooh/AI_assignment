@@ -58,7 +58,7 @@ class BFS_GUI(Visualizer):
         super().__init__(board, square_size, start, goal)
         pygame.display.set_caption("Breadth First Search Pathfinding Visualizer")
 
-    def bfs_gui(self):
+    def find_path(self):
         queue = deque([(self.start, [self.start])])  # Queue of (position, path) tuples
         visited = {self.start}
 

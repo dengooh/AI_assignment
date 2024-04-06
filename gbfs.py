@@ -56,7 +56,7 @@ class GBFS_GUI(Visualizer, SearchAlgorithm):
         super().__init__(board, square_size, start, goal)
         pygame.display.set_caption("Greedy Best First Search Pathfinding Visualizer")
 
-    def gbfs_gui(self):
+    def find_path(self):
         open_set = []
         heappush(open_set, (0, self.start))
         path = {self.start: None}  # Using a dictionary to reconstruct the path
@@ -84,7 +84,6 @@ class GBFS_GUI(Visualizer, SearchAlgorithm):
 
             # Slow down the visualization, adjust as needed
             self.visualize_search()
-            pygame.time.delay(50)
 
         # If no path is found
         yield None, None, visited, False, open_set

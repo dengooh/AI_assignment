@@ -8,7 +8,7 @@ class SearchAlgorithm:
         self.start = start
         self.goal = goal
 
-    def find_path(self):
+    def find_path(self, limit=None):
         pass
 
     @staticmethod
