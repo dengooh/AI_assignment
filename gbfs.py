@@ -54,7 +54,7 @@ class GBFS(SearchAlgorithm):
 class GBFS_GUI(Visualizer, SearchAlgorithm):
     def __init__(self, board, square_size, start, goal):
         super().__init__(board, square_size, start, goal)
-        pygame.display.set_caption("GBFS Pathfinding Visualizer")
+        pygame.display.set_caption("Greedy Best First Search Pathfinding Visualizer")
 
     def gbfs_gui(self):
         open_set = []
@@ -65,10 +65,10 @@ class GBFS_GUI(Visualizer, SearchAlgorithm):
         while open_set:
             current_priority, current = heappop(open_set)
 
-            yield current, self.reconstruct_path(path, current), visited, True, open_set
+            yield current, self.reconstruct_path_gui(path, current), visited, True, open_set
 
             if current in self.goal:
-                yield current, self.reconstruct_path(path, current), visited, True, open_set
+                yield current, self.reconstruct_path_gui(path, current), visited, True, open_set
                 return  # Path found
 
             x, y = current
@@ -88,12 +88,3 @@ class GBFS_GUI(Visualizer, SearchAlgorithm):
 
         # If no path is found
         yield None, None, visited, False, open_set
-
-    def reconstruct_path(self, path, current):
-        # Reconstruct the path from the goal to the start
-        reconstructed_path = []
-        while current in path:
-            reconstructed_path.append(current)
-            current = path[current]
-        reconstructed_path.reverse()  # The path is built from goal to start; reverse it
-        return reconstructed_path

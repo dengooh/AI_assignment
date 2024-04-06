@@ -53,6 +53,16 @@ class SearchAlgorithm:
         return path_taken, directions_taken, len(visited), path_taken[-1]
 
     @staticmethod
+    def reconstruct_path_gui(path, current):
+        # Reconstruct the path from the goal to the start
+        reconstructed_path = []
+        while current in path:
+            reconstructed_path.append(current)
+            current = path[current]
+        reconstructed_path.reverse()  # The path is built from goal to start; reverse it
+        return reconstructed_path
+
+    @staticmethod
     def heuristic(current, goal):
         # Manhattan distance to the closest goal_state
         # (return the x, y distances coordinates between the current and the goal nodes)

@@ -35,7 +35,7 @@ class DFS(SearchAlgorithm):
 class DFS_GUI(Visualizer):
     def __init__(self, board, square_size, start, goal):
         super().__init__(board, square_size, start, goal)
-        pygame.display.set_caption("DFS Pathfinding Visualizer")
+        pygame.display.set_caption("Depth First Search Pathfinding Visualizer")
 
     def dfs_gui(self):
         stack = [(self.start, [self.start])]  # Queue of (position, path) tuples
@@ -62,6 +62,5 @@ class DFS_GUI(Visualizer):
 
             # Visualize the current state of the search
             self.visualize_search()
-            pygame.time.delay(50)  # Slow down the visualization
 
         yield None, None, visited, False, stack

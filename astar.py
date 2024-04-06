@@ -42,7 +42,6 @@ class AS(SearchAlgorithm):
                     g_score[next_node] = tentative_g_score
                     f_score = tentative_g_score + self.heuristic(next_node, self.goal)
                     heappush(open_set, (f_score, next_node))
-                    print(path[current])
 
         return None, None, len(visited), "No goal is reachable"
 
@@ -50,7 +49,7 @@ class AS(SearchAlgorithm):
 class AS_GUI(Visualizer, SearchAlgorithm):
     def __init__(self, board, square_size, start, goal):
         super().__init__(board, square_size, start, goal)
-        pygame.display.set_caption("ASTAR Pathfinding Visualizer")
+        pygame.display.set_caption("A-Star Pathfinding Visualizer")
 
     def as_gui(self):
         # Open set contains nodes to be evaluated, as (F cost, node) tuples
@@ -64,10 +63,12 @@ class AS_GUI(Visualizer, SearchAlgorithm):
 
         while open_set:
             current_priority, current = heappop(open_set)
-            yield current, path, visited
+
+            yield current, self.reconstruct_path_gui(path, current), visited, True, open_set
 
             if current in self.goal:
-                return path[current]
+                yield current, self.reconstruct_path_gui(path, current), visited, True, open_set
+                return  # Path found
 
             x, y = current
             for dx, dy in DIRECTIONS:
@@ -86,9 +87,8 @@ class AS_GUI(Visualizer, SearchAlgorithm):
                     g_score[next_node] = tentative_g_score
                     f_score = tentative_g_score + self.heuristic(next_node, self.goal)
                     heappush(open_set, (f_score, next_node))
-                    self.grid[next_y][next_x] = 'O'
+                    path[(next_x, next_y)] = current
 
             self.visualize_search()
-            pygame.time.delay(50)
 
-        return []
+        yield None, None, visited, False, open_set

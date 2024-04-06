@@ -1,4 +1,3 @@
-import sys
 import argparse
 
 
@@ -73,4 +72,3 @@ class TermInput:
             walls_coordinates.append(walls)
 
         return walls_coordinates
-

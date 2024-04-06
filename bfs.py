@@ -56,7 +56,7 @@ class BFS(SearchAlgorithm):
 class BFS_GUI(Visualizer):
     def __init__(self, board, square_size, start, goal):
         super().__init__(board, square_size, start, goal)
-        pygame.display.set_caption("BFS Pathfinding Visualizer")
+        pygame.display.set_caption("Breadth First Search Pathfinding Visualizer")
 
     def bfs_gui(self):
         queue = deque([(self.start, [self.start])])  # Queue of (position, path) tuples
@@ -84,7 +84,6 @@ class BFS_GUI(Visualizer):
 
             # Visualize the current state of the search
             self.visualize_search()
-            pygame.time.delay(50)  # Slow down the visualization
 
         # return []
         yield None, None, visited, False, queue  # False indicates no path was found

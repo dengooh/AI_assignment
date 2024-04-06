@@ -47,10 +47,8 @@ if __name__ == "__main__":
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
                 board = Board(grid_rows, grid_cols, walls)
                 dfs = DFS_GUI(board, 40, initial_state, goal_state)
-                # game = Visualizer()
 
                 dfs.run_visualization(dfs.dfs_gui())
-                # dfs.finish_path(dfs_path)
 
         case 'GBFS':
             gbfs = GBFS(board, initial_state, goal_state)

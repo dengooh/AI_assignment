@@ -66,13 +66,10 @@ class Visualizer(Board):
                                self.square_size)
             pygame.draw.rect(self.screen, (255, 165, 0), rect)  # Orange for the current position
 
+        # Data extraction from both stack type data structure and a tuple type data structure.
         if container:
             for item in container:
-                # Attempt to handle both a priority queue and a stack.
-                # For a priority queue, 'item' might be (priority, (x, y)).
-                # For a stack or queue, 'item' might directly be the position (x, y) or a tuple containing a position and path.
-
-                # Extract position based on item structure
+                # Extract position based on item structure.
                 if isinstance(item, tuple):
                     if isinstance(item[1], tuple) and len(item[1]) == 2:
                         pos = item[1]  # Priority queue scenario: (priority, (x, y))
@@ -93,7 +90,7 @@ class Visualizer(Board):
                 except TypeError as e:
                     print(f"Error drawing for {item}: {e}")
 
-        # Redraw grid borders after everything else to ensure visibility
+        # Redraw grid borders after everything else to ensure visibility (DURING SEARCH)
         for row in range(self.rows):
             for col in range(self.cols):
                 rect = pygame.Rect(col * self.square_size, row * self.square_size, self.square_size, self.square_size)
@@ -141,7 +138,7 @@ class Visualizer(Board):
                         return
 
                 pygame.display.flip()
-                pygame.time.delay(100)  # Adjust delay as needed
+                pygame.time.delay(100)  # Adjust delay for search visualization
         except StopIteration:
             pass  # BFS search is complete
 
