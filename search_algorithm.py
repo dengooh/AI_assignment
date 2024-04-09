@@ -8,9 +8,6 @@ class SearchAlgorithm:
         self.start = start
         self.goal = goal
 
-    def find_path(self, limit=None):
-        pass
-
     @staticmethod
     def reconstruct_path(path, current, visited):
         # Initializes 'current' with the goal node.

@@ -5,6 +5,7 @@ from gbfs import GBFS, GBFS_GUI
 from astar import AS, AS_GUI
 from terminput import TermInput
 from cus1 import CUS1, CUS1_GUI
+from cus2 import CUS2
 
 
 if __name__ == "__main__":
@@ -25,14 +26,11 @@ if __name__ == "__main__":
             bfs_path, bfs_directions, bfs_visited, bfs_goal = bfs.find_path()
 
             print(TI.get_filename() + " " + TI.get_method())
-            print("Goal node: ", bfs_goal)
-            print("Visited: ", bfs_visited)
-            print("Direction found with BFS: ", bfs_directions)
+            print("Goal node: ", bfs_goal, "| Visited: ", bfs_visited)
+            print("Direction found with BFS: ", bfs_directions, "\n")
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
-                board = Board(grid_rows, grid_cols, walls)
                 bfs = BFS_GUI(board, 40, start, goal)
-                # game = Visualizer()
 
                 bfs.run_visualization(bfs.find_path())
 
@@ -46,7 +44,6 @@ if __name__ == "__main__":
             print("Direction found with DFS: ", dfs_directions)
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
-                board = Board(grid_rows, grid_cols, walls)
                 dfs = DFS_GUI(board, 40, start, goal)
 
                 dfs.run_visualization(dfs.find_path())
@@ -61,7 +58,6 @@ if __name__ == "__main__":
             print("Direction found with GBFS: ", gbfs_directions)
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
-                board = Board(grid_rows, grid_cols, walls)
                 gbfs = GBFS_GUI(board, 40, start, goal)
 
                 gbfs.run_visualization(gbfs.find_path())
@@ -76,7 +72,6 @@ if __name__ == "__main__":
             print("Direction found with A-Star: ", astar_directions)
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
-                board = Board(grid_rows, grid_cols, walls)
                 astar = AS_GUI(board, 40, start, goal)
 
                 astar.run_visualization(astar.find_path())
@@ -101,10 +96,16 @@ if __name__ == "__main__":
             print("Direction found with DLS: ", dls_directions)
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
-                board = Board(grid_rows, grid_cols, walls)
                 dls = CUS1_GUI(board, 40, start, goal)
 
                 dls.run_visualization(dls.find_path(limit))
 
         case 'CUS2':
-            pass
+
+            rbfs = CUS2(board, start, goal)
+            rbfs_path, rbfs_directions, rbfs_visited, rbfs_goal = rbfs.find_path()
+
+            print(TI.get_filename() + " " + TI.get_method())
+            print("Goal node: ", rbfs_goal)
+            print("Visited: ", rbfs_visited)
+            print("Direction found with RBFS: ", rbfs_directions)

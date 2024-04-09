@@ -1,5 +1,7 @@
-import pygame
 from board import Board
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+import pygame
 
 
 class Visualizer(Board):
@@ -124,6 +126,7 @@ class Visualizer(Board):
 
     def run_visualization(self, search_method):
         path_found = False
+        path = []
 
         try:
             while True:
@@ -138,7 +141,7 @@ class Visualizer(Board):
                         return
 
                 pygame.display.flip()
-                pygame.time.delay(10)  # Adjust delay for search visualization
+                pygame.time.delay(100)  # Adjust delay for search visualization
         except StopIteration:
             pass  # BFS search is complete
 
