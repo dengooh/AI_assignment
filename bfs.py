@@ -4,21 +4,19 @@ from visualizer import Visualizer
 import pygame
 
 
-# Inherits from SearchAlgorithm
+# inherits from SearchAlgorithm
 class BFS(SearchAlgorithm):
     def __init__(self, board, start, goal):
         super().__init__(board, start, goal)
 
-    # Perform BFS to find a path from start to one of the goal states
+    # perform BFS to find a path from start to one of the goal states
     def find_path(self):
-        # Initialize the queue for BFS with the start position
+        # initialize the queue for BFS with the start position
         queue = deque([self.start])
-        # Keep track of visited cells to prevent repetition
+        # keep track of visited cells for repeated state check
         visited = {self.start}
-        # Record the path taken to reach each cell
         path = {self.start: None}
 
-        # Process each cell in the queue
         while queue:
             current = queue.popleft()
             if current in self.goal:
@@ -49,7 +47,7 @@ class BFS(SearchAlgorithm):
                     # found, you can trace back from the goal to the start node using this dictionary, effectively --
                     # reconstructing the path taken.
 
-        # If no path is found, return None.
+        # if no path is found, return None.
         return None, None, len(visited), "No goal is reachable"
 
 
@@ -82,8 +80,8 @@ class BFS_GUI(Visualizer):
                     visited.add((next_x, next_y))
                     queue.append(((next_x, next_y), path + [(next_x, next_y)]))
 
-            # Visualize the current state of the search
+            # visualize the current state of the search
             self.visualize_search()
 
         # return []
-        yield None, None, visited, False, queue  # False indicates no path was found
+        yield None, None, visited, False, queue  # false indicates no path was found

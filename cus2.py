@@ -1,6 +1,8 @@
 from search_algorithm import SearchAlgorithm, DIRECTIONS
 
 
+"""Iterative Deepening A Star search attempt"""
+
 class CUS2(SearchAlgorithm):
     def __init__(self, board, start, goal):
         super().__init__(board, start, goal)

@@ -8,7 +8,7 @@ class CUS1(SearchAlgorithm):
         super().__init__(board, start, goal)
 
     def find_path(self, limit):
-        stack = [(self.start, 0)]  # Stack elements representing (node, depth)
+        stack = [(self.start, 0)]  # stack elements representing (node, depth)
         visited = {self.start}
         path = {self.start: None}
 
@@ -18,7 +18,7 @@ class CUS1(SearchAlgorithm):
             if current in self.goal:
                 return self.reconstruct_path(path, current, visited)
 
-            # Stop expanding this branch if the depth limit is reached
+            # stop expanding this branch if the depth limit is reached
             if depth == limit:
                 continue
 
@@ -30,7 +30,7 @@ class CUS1(SearchAlgorithm):
 
                 if self.board.is_free(next_x, next_y) and next_node not in visited:
                     visited.add(next_node)
-                    # Append the next node to the stack along with its depth
+                    # append the next node to the stack along with its depth
                     stack.append((next_node, depth + 1))
                     path[next_node] = current
 
@@ -62,7 +62,7 @@ class CUS1_GUI(Visualizer):
 
                     if self.board.is_free(next_x, next_y) and (next_x, next_y) not in visited:
                         visited.add((next_x, next_y))
-                        # Include the updated depth in the stack elements
+                        # include the updated depth in the stack elements
                         stack.append(((next_x, next_y), path + [(next_x, next_y)], depth + 1))
 
             self.visualize_search()

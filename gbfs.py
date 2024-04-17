@@ -10,19 +10,19 @@ class GBFS(SearchAlgorithm):
 
     def find_path(self):
         # this list will be used as a priority queue where nodes to be explored are stored along with their priorities
-        open_set = []
-        # adds teh starting node to the 'open_set' with a priority of '0'
-        heappush(open_set, (0, self.start))
+        priority_queue = []
+        # adds the starting node to the 'priority_queue' with a priority of '0'
+        heappush(priority_queue, (0, self.start))
         # maps each node to its predecessor on the shortest path found so far. The start node doesn't have a --
         # predecessor, hence it's mapped to 'None'
         path = {self.start: None}
         visited = set()
 
-        while open_set:
-            # removes and returns the node with the highest priority (lowest value) from the 'open_set' --
+        while priority_queue:
+            # removes and returns the node with the highest priority (lowest value) from the 'priority_queue' --
             # this operation also maintains the heap property. 'current' is the node to be explored next, and --
             # 'current-property' is its priority
-            current_priority, current = heappop(open_set)
+            current_priority, current = heappop(priority_queue)
 
             if current in self.goal:
                 return self.reconstruct_path(path, current, visited)
@@ -42,9 +42,9 @@ class GBFS(SearchAlgorithm):
                         # calculates the priority of the neighboring node using the heuristic function. This priority --
                         # is typically a measure of how close the node is to the goal
                         priority = self.heuristic(next_step, self.goal)
-                        # adds the neighboring node to the 'open_set' with its calculated priority, ensuring the node --
+                        # adds the neighboring node to the 'priority_queue' with its calculated priority, ensuring the node --
                         # will be explored in an order determined by its priority
-                        heappush(open_set, (priority, next_step))
+                        heappush(priority_queue, (priority, next_step))
                         # records the current node as the predecessor of the neighbor. need for path reconstruction
                         path[next_step] = current
 
@@ -59,7 +59,7 @@ class GBFS_GUI(Visualizer, SearchAlgorithm):
     def find_path(self):
         open_set = []
         heappush(open_set, (0, self.start))
-        path = {self.start: None}  # Using a dictionary to reconstruct the path
+        path = {self.start: None}  # using a dictionary to reconstruct the path
         visited = {self.start}
 
         while open_set:
@@ -69,7 +69,7 @@ class GBFS_GUI(Visualizer, SearchAlgorithm):
 
             if current in self.goal:
                 yield current, self.reconstruct_path_gui(path, current), visited, True, open_set
-                return  # Path found
+                return  # path found
 
             x, y = current
 
@@ -80,10 +80,10 @@ class GBFS_GUI(Visualizer, SearchAlgorithm):
                     visited.add((next_x, next_y))
                     priority = self.heuristic((next_x, next_y), self.goal)
                     heappush(open_set, (priority, (next_x, next_y)))
-                    path[(next_x, next_y)] = current  # Important for path reconstruction
+                    path[(next_x, next_y)] = current  # important for path reconstruction
 
-            # Slow down the visualization, adjust as needed
+            # slow down the visualization, adjust as needed
             self.visualize_search()
 
-        # If no path is found
+        # if no path is found
         yield None, None, visited, False, open_set

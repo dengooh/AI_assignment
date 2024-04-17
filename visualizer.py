@@ -7,32 +7,34 @@ import pygame
 class Visualizer(Board):
     def __init__(self, board, square_size, start, goal):
         self.board = board
-        # Initialize Pygame
+        # initialize Pygame
         pygame.init()
 
-        # Set square size
+        # set square size
         self.square_size = square_size
         self.rows = board.get_rows()
         self.cols = board.get_cols()
 
-        # Calculate window size
+        # calculate window size
         self.window_width = self.square_size * self.cols
         self.window_height = self.square_size * self.rows
-        self.screen = pygame.display.set_mode((self.window_width, self.window_height), pygame.DOUBLEBUF)
+        self.screen = pygame.display.set_mode((self.window_width, self.window_height))
 
-        # Colors
+        # colors
         self.background_color = (255, 255, 255)  # White
         self.grid_color = (0, 0, 0)  # Black
         self.wall_color = (128, 128, 128)  # Gray
         self.start_color = (255, 0, 0)  # Green
         self.goal_color = (0, 255, 0)  # Red
+        self.visited_color = (64, 224, 208)
+        self.current_color = (255, 165, 0)
 
-        # Set start position
+        # set start position
         self.grid = board.get_grid()
         self.start = start
         self.grid[start[1]][start[0]] = 'S'
 
-        # Set goal positions
+        # set goal positions
         self.goal = goal
         for pos in self.goal:
             self.grid[pos[1]][pos[0]] = 'G'
@@ -40,11 +42,11 @@ class Visualizer(Board):
     def visualize_search(self, current=None, visited=None, container=None):
         self.screen.fill(self.background_color)
 
-        # First, draw all grid cells
+        # first, draw all grid cells
         for row in range(self.rows):
             for col in range(self.cols):
                 rect = pygame.Rect(col * self.square_size, row * self.square_size, self.square_size, self.square_size)
-                color = self.background_color  # Default color for empty cells
+                color = self.background_color  # default color for empty cells
 
                 if self.grid[row][col] == 'X':  # Wall
                     color = self.wall_color
@@ -60,15 +62,15 @@ class Visualizer(Board):
             for pos in visited:
                 rect = pygame.Rect(pos[0] * self.square_size, pos[1] * self.square_size, self.square_size,
                                    self.square_size)
-                pygame.draw.rect(self.screen, (64, 224, 208), rect)  # Use a color for visited nodes
+                pygame.draw.rect(self.screen, self.visited_color, rect)  # Use a color for visited nodes
 
-        # Finally, highlight the current position if available
+        # finally, highlight the current position if available
         if current is not None:
             rect = pygame.Rect(current[0] * self.square_size, current[1] * self.square_size, self.square_size,
                                self.square_size)
-            pygame.draw.rect(self.screen, (255, 165, 0), rect)  # Orange for the current position
+            pygame.draw.rect(self.screen, self.current_color, rect)  # Orange for the current position
 
-        # Data extraction from both stack type data structure and a tuple type data structure.
+        # data extraction from both stack type data structure and a tuple type data structure.
         if container:
             for item in container:
                 # Extract position based on item structure.
@@ -84,7 +86,7 @@ class Visualizer(Board):
                     print(f"Item is not a tuple, check container structure: {item}")
                     continue  # Skip this item
 
-                # Now, pos should be a valid position (x, y)
+                # now, pos should be a valid position (x, y)
                 try:
                     queue_rect = pygame.Rect(pos[0] * self.square_size, pos[1] * self.square_size, self.square_size,
                                              self.square_size)
@@ -124,7 +126,7 @@ class Visualizer(Board):
                 pygame.display.flip()
                 pygame.time.delay(100)
 
-    def run_visualization(self, search_method):
+    def draw(self, search_method):
         path_found = False
         path = []
 
@@ -146,12 +148,6 @@ class Visualizer(Board):
             pass  # BFS search is complete
 
         self.finish_path(path=path if path_found else None)
-
-        # Redraw grid borders after everything else to ensure visibility
-        for row in range(self.rows):
-            for col in range(self.cols):
-                rect = pygame.Rect(col * self.square_size, row * self.square_size, self.square_size, self.square_size)
-                pygame.draw.rect(self.screen, self.grid_color, rect, 1)  # Draw border with grid color
 
         waiting_for_close = True
         while waiting_for_close:

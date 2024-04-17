@@ -10,8 +10,10 @@ from cus2 import CUS2
 
 if __name__ == "__main__":
 
+    # initialization of terminput class
     TI = TermInput()
 
+    # getting a data and assign it the correct value
     grid_rows = TI.get_grid_size()[0]
     grid_cols = TI.get_grid_size()[1]
     start = TI.get_initial_state()
@@ -20,61 +22,59 @@ if __name__ == "__main__":
 
     board = Board(grid_rows, grid_cols, walls)
 
+    # switch case statement to know which function to be used and executed.
     match TI.get_method():
         case 'BFS':
             bfs = BFS(board, start, goal)
             bfs_path, bfs_directions, bfs_visited, bfs_goal = bfs.find_path()
 
             print(TI.get_filename() + " " + TI.get_method())
-            print("Goal node: ", bfs_goal, "| Visited: ", bfs_visited)
-            print("Direction found with BFS: ", bfs_directions, "\n")
+            print("Goal node: ", bfs_goal, "| Number of Nodes: ", bfs_visited)
+            print("Direction found with BFS: ", bfs_directions, '\n')
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
                 bfs = BFS_GUI(board, 40, start, goal)
 
-                bfs.run_visualization(bfs.find_path())
+                bfs.draw(bfs.find_path())
 
         case 'DFS':
             dfs = DFS(board, start, goal)
             dfs_path, dfs_directions, dfs_visited, dfs_goal = dfs.find_path()
 
             print(TI.get_filename() + " " + TI.get_method())
-            print("Goal node: ", dfs_goal)
-            print("Visited: ", dfs_visited)
-            print("Direction found with DFS: ", dfs_directions)
+            print("Goal node: ", dfs_goal, "| Number of Nodes: ", dfs_visited)
+            print("Direction found with DFS: ", dfs_directions, '\n')
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
                 dfs = DFS_GUI(board, 40, start, goal)
 
-                dfs.run_visualization(dfs.find_path())
+                dfs.draw(dfs.find_path())
 
         case 'GBFS':
             gbfs = GBFS(board, start, goal)
             gbfs_path, gbfs_directions, gbfs_visited, gbfs_goal = gbfs.find_path()
 
             print(TI.get_filename() + " " + TI.get_method())
-            print("Goal node: ", gbfs_goal)
-            print("Visited: ", gbfs_visited)
-            print("Direction found with GBFS: ", gbfs_directions)
+            print("Goal node: ", gbfs_goal, "| Number of Nodes: ", gbfs_visited)
+            print("Direction found with GBFS: ", gbfs_directions, '\n')
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
                 gbfs = GBFS_GUI(board, 40, start, goal)
 
-                gbfs.run_visualization(gbfs.find_path())
+                gbfs.draw(gbfs.find_path())
 
         case 'AS':
             astar = AS(board, start, goal)
             astar_path, astar_directions, astar_visited, astar_goal = astar.find_path()
 
             print(TI.get_filename() + " " + TI.get_method())
-            print("Goal node: ", astar_goal)
-            print("Visited: ", astar_visited)
-            print("Direction found with A-Star: ", astar_directions)
+            print("Goal node: ", astar_goal, "| Number of Nodes: ", astar_visited)
+            print("Direction found with A-Star: ", astar_directions, '\n')
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
                 astar = AS_GUI(board, 40, start, goal)
 
-                astar.run_visualization(astar.find_path())
+                astar.draw(astar.find_path())
 
         case 'CUS1':
             ran = False
@@ -91,21 +91,13 @@ if __name__ == "__main__":
             dls_path, dls_directions, dls_visited, dls_goal = dls.find_path(limit)
 
             print(TI.get_filename() + " " + TI.get_method())
-            print("Goal node: ", dls_goal)
-            print("Visited: ", dls_visited)
-            print("Direction found with DLS: ", dls_directions)
+            print("Goal node: ", dls_goal, "| Number of Nodes: ", dls_visited)
+            print("Direction found with DLS: ", dls_directions, '\n')
 
             if TI.get_second_method() is not None and TI.get_second_method() == 'GUI':
                 dls = CUS1_GUI(board, 40, start, goal)
 
-                dls.run_visualization(dls.find_path(limit))
+                dls.draw(dls.find_path(limit))
 
         case 'CUS2':
-
-            rbfs = CUS2(board, start, goal)
-            rbfs_path, rbfs_directions, rbfs_visited, rbfs_goal = rbfs.find_path()
-
-            print(TI.get_filename() + " " + TI.get_method())
-            print("Goal node: ", rbfs_goal)
-            print("Visited: ", rbfs_visited)
-            print("Direction found with RBFS: ", rbfs_directions)
+            pass

@@ -3,7 +3,7 @@ from visualizer import Visualizer
 import pygame
 
 
-# Implemented the same way as BFS, but use a stack memory (FILO)
+# mplemented the same way as BFS, but use a stack memory (FILO)
 class DFS(SearchAlgorithm):
     def __init__(self, board, start, goal_state):
         super().__init__(board, start, goal_state)
@@ -38,14 +38,14 @@ class DFS_GUI(Visualizer):
         pygame.display.set_caption("Depth First Search Pathfinding Visualizer")
 
     def find_path(self):
-        stack = [(self.start, [self.start])]  # Queue of (position, path) tuples
+        stack = [(self.start, [self.start])]  # queue of (position, path) tuples
         visited = {self.start}
 
         while stack:
             current_pos, path = stack.pop()
             yield current_pos, path, visited, True, stack
 
-            # If current position is a goal, return the path
+            # if current position is a goal, return the path
             if current_pos in self.goal:
                 yield current_pos, path, visited, True, stack
                 return
@@ -58,9 +58,8 @@ class DFS_GUI(Visualizer):
                 if self.board.is_free(next_x, next_y) and (next_x, next_y) not in visited:
                     visited.add((next_x, next_y))
                     stack.append(((next_x, next_y), path + [(next_x, next_y)]))
-                    # self.grid[next_y][next_x] = 'O'  # Optional: Mark cell as visited for visualization
 
-            # Visualize the current state of the search
+            # visualize the current state of the search
             self.visualize_search()
 
         yield None, None, visited, False, stack

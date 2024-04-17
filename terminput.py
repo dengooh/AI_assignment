@@ -3,7 +3,7 @@ import argparse
 
 class TermInput:
     def __init__(self):
-
+        # initialize the argeparse arguments
         self.p = argparse.ArgumentParser()
         self.p.add_argument("args", nargs="+")
         self.args = self.p.parse_args()
@@ -23,11 +23,14 @@ class TermInput:
             return self.setup_args()[2]
         return None
 
+    # getting grid size
     def get_grid_size(self):
         with open(self.get_filename(), 'r') as file:
             line = file.readline().strip()
 
+        # reformatting the strings
         grid_size_str = line.replace('[', '').replace(']', '')
+        # storing the values from the read file as an integer
         grid_size = (list(map(int, grid_size_str.split(','))))
 
         grid_rows, grid_cols = grid_size[0], grid_size[1]
@@ -36,6 +39,7 @@ class TermInput:
 
     def get_initial_state(self):
         with open(self.get_filename(), 'r') as file:
+            # skiping the current line
             next(file)
             line = file.readline().strip()
 
